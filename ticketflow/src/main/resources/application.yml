@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/ticketflow
-    password: mot_de_passe_a_definir
     username: ticketflow_app
+    password: ticketflow_mdp
     driver-class-name: org.postgresql.Driver
   jpa:
     generate-ddl: false
@@ -14,6 +14,13 @@ spring:
         globally_quoted_identifiers: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+        default_schema: ticketflow
   sql:
     init:
       mode: never
+  flyway:
+    enabled: true
+    default-schema: ticketflow
+    baseline-on-migrate: true
+    schemas:
+      - ticketflow
