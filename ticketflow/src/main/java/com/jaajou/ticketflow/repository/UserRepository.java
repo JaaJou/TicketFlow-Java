@@ -1,7 +1,7 @@
 package com.jaajou.ticketflow.repository;
 
 import java.util.Collection;
-import com.jaajou.ticketflow.domain.User;
+import com.jaajou.ticketflow.entity.User;
 
 public interface UserRepository<T extends User> {
     /*Basic CRUD Operations*/

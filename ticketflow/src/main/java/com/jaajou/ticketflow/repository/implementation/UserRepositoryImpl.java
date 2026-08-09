@@ -1,6 +1,6 @@
 package com.jaajou.ticketflow.repository.implementation;
 
-import com.jaajou.ticketflow.domain.User;
+import com.jaajou.ticketflow.entity.User;
 import com.jaajou.ticketflow.repository.UserRepository;
 
 import java.util.Collection;
