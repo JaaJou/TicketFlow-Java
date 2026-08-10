@@ -1,16 +1,13 @@
 package com.jaajou.ticketflow.repository;
 
-import java.util.Collection;
 import com.jaajou.ticketflow.entity.User;
+import java.util.List;
+import java.util.Optional;
 
-public interface UserRepository<T extends User> {
-    /*Basic CRUD Operations*/
-    T create(T data);
-    Collection<T> list(int page, int pageSize);
-    T get(Long id);
-    T update(T data);
-    void delete(T data);
-    Boolean delete (Long id);
-
-    /*More complex Operations */
+public interface UserRepository {
+    User save(User user);
+    Optional<User> findById(Long id);
+    List<User> findAll();
+    void deleteById(Long id);
+    Optional<User> findByEmail(String email);
 }
