@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.sql.results.graph.EntityGraphTraversalState;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -25,7 +24,7 @@ public class User {
     private String firstName;
 
     @Column(name = "lastname", nullable = false)
-    private String lastname;
+    private String lastName;
 
     @Column(unique = true, nullable = false)
     private String email;
