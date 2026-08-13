@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { UserService } from '../services/userService';
 import { User } from '../models/user';
 
@@ -10,15 +10,15 @@ import { User } from '../models/user';
   styleUrl: './users.css',
 })
 export class UsersComponent implements OnInit {
+
   private userService = inject(UserService);
 
-  users: User[] = [];
+  users = signal<User[]>([]);
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe({
       next: users => {
-        console.log('UTILISATEURS REÇUS :', users);
-        this.users = users;
+        this.users.set(users);
       },
       error: error => {
         console.error('ERREUR API :', error);
