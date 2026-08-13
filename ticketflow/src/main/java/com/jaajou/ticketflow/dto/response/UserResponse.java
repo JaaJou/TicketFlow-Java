@@ -4,8 +4,8 @@ import java.util.List;
 
 public record UserResponse(
         Long id,
-        String firstname,
-        String lastname,
+        String firstName,
+        String lastName,
         String email,
         String phone,
         String status,
