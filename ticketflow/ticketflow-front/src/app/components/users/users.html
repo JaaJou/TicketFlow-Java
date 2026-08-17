@@ -1,13 +1,24 @@
-<h1>Utilisateurs</h1>
+<div class="user-page">
+  <section>
+    <h2 class="user-title">Parcourir les utilisateurs</h2>
+  </section>
 
-<button (click)="loadUsers()"> Charger les utilisateurs</button>
+  <button class="btn btn-primary px-4" (click)="loadUsers()"> Charger les utilisateurs</button>
+  <button class="btn btn-primary px-4" (click)="emptyUsers()"> Vider les utilisateurs</button>
 
-<p>Nombre d'utilisateurs : {{ users().length }}</p>
+  <p>Nombre d'utilisateurs : {{ users().length }}</p>
 
-<ul>
-  @for (user of users(); track user.id) {
-  <li>
-    {{ user.firstName }} {{ user.lastName }} - {{ user.email }}
-  </li>
-  }
-</ul>
+<ag-grid-angular
+  class="users-grid"
+  [rowData]="users()"
+  [columnDefs]="colDefs"
+  [theme]="theme"
+  [pagination]="true"
+  [paginationPageSize]="10"
+  [paginationPageSizeSelector]="[10,20,50]"
+  [rowSelection]="rowSelection"
+  (selectionChanged)="onSelectionChanged($event)"
+>
+</ag-grid-angular>
+
+</div>

@@ -33,7 +33,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: block;
-  height: 100dvh;
 }
 
 h1 {
@@ -51,17 +50,6 @@ h1 {
 p {
   margin: 0;
   color: var(--gray-700);
-}
-
-main {
-  width: 100%;
-  min-height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  box-sizing: inherit;
-  position: relative;
 }
 
 .angular-logo {
@@ -90,6 +78,13 @@ main {
   margin-inline: 0.5rem;
 }
 
+.page-container{
+  width: 80%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .pill-group {
   display: flex;
   flex-direction: column;
@@ -109,7 +104,6 @@ main {
   border-radius: 2.75rem;
   border: 0;
   transition: background 0.3s ease;
-  font-family: var(--inter-font);
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
@@ -157,6 +151,14 @@ main {
 
 .social-links a:hover svg path {
   fill: var(--gray-900);
+}
+
+.text-main-title {
+  background: linear-gradient(90deg, #0d6efd, #6f42c1);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 @media screen and (max-width: 650px) {
