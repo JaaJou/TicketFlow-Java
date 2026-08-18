@@ -19,3 +19,12 @@ header{
   width: 100%;
   height: 500px;
 }
+
+.user-infos{
+  color: #4f46e5;
+}
+
+#userModal .modal-dialog {
+  width: fit-content;
+  max-width: 90vw;
+}
