@@ -14,7 +14,6 @@ import {ColDef, themeQuartz, SelectionChangedEvent, RowSelectionOptions, ICellRe
 export class UsersComponent {
 
   private userService = inject(UserService);
-
   users = signal<User[]>([]);
 
   colDefs: ColDef<User>[] = [
@@ -27,7 +26,7 @@ export class UsersComponent {
         const button = document.createElement('button');
 
         button.innerText = 'View';
-        button.classList.add('btn', 'btn-sm', 'btn-primary');
+        button.classList.add('btn', 'btn-secondary', 'align-item-center', 'justify-content-between');
 
         button.addEventListener('click', () => {
           console.log('Utilisateur :', params.data);
