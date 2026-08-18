@@ -1,4 +1,4 @@
-<main class="users-page">
+<div class="users-page">
   <header>
     <h2 class="users-title">Browse Users</h2>
     <hr>
@@ -17,7 +17,7 @@
       </button>
     </div>
 
-    <main>
+    <div>
       <ag-grid-angular
         class="users-grid"
         [rowData]="users()"
@@ -27,9 +27,37 @@
         [paginationPageSize]="10"
         [paginationPageSizeSelector]="[10,20,50]"
         [rowSelection]="rowSelection"
+        [suppressCellFocus]="true"
         (selectionChanged)="onSelectionChanged($event)"
       ></ag-grid-angular>
-    </main>
+    </div>
   </section>
 
-</main>
+  <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>User details</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close">
+          </button>
+        </div>
+
+        <div class="modal-body">
+          @if(selectedUser){
+            <p>{{ selectedUser.firstName }}</p>
+          }
+        </div>
+
+        <div class="modal-footer">
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
