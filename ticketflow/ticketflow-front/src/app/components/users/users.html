@@ -1,24 +1,37 @@
-<div class="user-page">
+<div class="users-page">
+  <header>
+    <h2 class="users-title">Browse Users</h2>
+    <hr>
+  </header>
+
   <section>
-    <h2 class="user-title">Parcourir les utilisateurs</h2>
+    <div class="d-flex gap-2 mb-3 p-2 align-items-center justify-content-end bg-light">
+      <p class="mb-0">
+        Users loaded : {{ users().length }}
+      </p>
+      <button class="btn btn-secondary" (click)="loadUsers()">
+        Refresh
+      </button>
+      <button class="btn btn-danger" (click)="emptyUsers()">
+        Empty
+      </button>
+    </div>
+
+    <div>
+      <ag-grid-angular
+        class="users-grid"
+        [rowData]="users()"
+        [columnDefs]="colDefs"
+        [theme]="theme"
+        [pagination]="true"
+        [paginationPageSize]="50"
+        [paginationPageSizeSelector]="[10,20,50]"
+        [rowSelection]="rowSelection"
+        [suppressCellFocus]="true"
+        (selectionChanged)="onSelectionChanged($event)"
+      ></ag-grid-angular>
+    </div>
+
   </section>
-
-  <button class="btn btn-primary px-4" (click)="loadUsers()"> Charger les utilisateurs</button>
-  <button class="btn btn-primary px-4" (click)="emptyUsers()"> Vider les utilisateurs</button>
-
-  <p>Nombre d'utilisateurs : {{ users().length }}</p>
-
-<ag-grid-angular
-  class="users-grid"
-  [rowData]="users()"
-  [columnDefs]="colDefs"
-  [theme]="theme"
-  [pagination]="true"
-  [paginationPageSize]="10"
-  [paginationPageSizeSelector]="[10,20,50]"
-  [rowSelection]="rowSelection"
-  (selectionChanged)="onSelectionChanged($event)"
->
-</ag-grid-angular>
 
 </div>
