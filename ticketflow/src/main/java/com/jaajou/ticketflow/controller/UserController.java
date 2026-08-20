@@ -52,7 +52,14 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(@PathVariable Long id, @Valid @RequestBody UserUpdateRequest request) {
-        User user = userService.updateUser(id, request.firstName(), request.lastName(), request.email(), request.phone(), request.profilePictureUrl());
+        User user = userService.updateUser(
+                id,
+                request.firstName(),
+                request.lastName(),
+                request.email(),
+                request.phone(),
+                request.profilePictureUrl()
+        );
         return ResponseEntity.ok(userMapper.toResponse(user));
     }
 

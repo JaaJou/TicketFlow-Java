@@ -1,7 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import {Component, inject, signal, AfterViewInit, OnInit} from '@angular/core';
 import { UserService } from '@services/user.service';
 import { User } from '@models/user';
 import { AgGridAngular } from 'ag-grid-angular';
+import { ViewUserDetailsCellComponent } from '@components/view-details-cell/view-details-cell.component';
 import {ColDef, themeQuartz, SelectionChangedEvent, RowSelectionOptions, ICellRendererParams} from 'ag-grid-community';
 
 @Component({
@@ -11,10 +12,9 @@ import {ColDef, themeQuartz, SelectionChangedEvent, RowSelectionOptions, ICellRe
   templateUrl: './users.html',
   styleUrl: './users.css',
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit{
 
   private userService = inject(UserService);
-
   users = signal<User[]>([]);
 
   colDefs: ColDef<User>[] = [
@@ -23,18 +23,7 @@ export class UsersComponent {
     {field: 'email', headerName: 'Mail', sortable: true, filter: true},
     {
       headerName: 'Actions',
-      cellRenderer: (params: ICellRendererParams<User>) => {
-        const button = document.createElement('button');
-
-        button.innerText = 'View';
-        button.classList.add('btn', 'btn-sm', 'btn-primary');
-
-        button.addEventListener('click', () => {
-          console.log('Utilisateur :', params.data);
-        });
-
-        return button;
-      }
+      cellRenderer: ViewUserDetailsCellComponent
     }
   ]
 
@@ -54,16 +43,39 @@ export class UsersComponent {
 
   loadUsers() : void {
     this.userService.getUsers().subscribe({
-        next: usersFromService =>{
-          this.users.set(usersFromService)
-        },
-        error: error => {
-          console.error('Erreur api :', error);
-        }
-      });
+      next: usersFromService =>{
+        this.users.set(usersFromService)
+      },
+      error: error => {
+        console.error('Erreur api :', error);
+      }
+    });
   }
 
   emptyUsers(): void {
     this.users.set([]);
+  }
+
+  // Retire le focus de l'élément actif avant que Bootstrap masque la modale,
+  // afin d'éviter le conflit entre le focus et l'attribut aria-hidden.
+  ngAfterViewInit(): void {
+    const modal = document.getElementById('userModal');
+
+    modal?.addEventListener('hide.bs.modal', () => {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    this.userService.getUsers().subscribe({
+      next: usersFromService =>{
+        this.users.set(usersFromService)
+      },
+      error: error => {
+        console.error('Erreur api :', error);
+      }
+    });
   }
 }

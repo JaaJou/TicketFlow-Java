@@ -1,13 +1,16 @@
-.user-title {
+header{
+  padding: 1rem;
+}
+
+.users-title {
   background: linear-gradient(90deg, #0d6efd, #6f42c1);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 3rem;
 }
 
-.user-page{
+.users-page{
   margin-top: 1.5rem;
   margin-left: 3rem;
 }
@@ -15,4 +18,13 @@
 .users-grid {
   width: 100%;
   height: 500px;
+}
+
+.user-infos{
+  color: #4f46e5;
+}
+
+#userModal .modal-dialog {
+  width: fit-content;
+  max-width: 90vw;
 }

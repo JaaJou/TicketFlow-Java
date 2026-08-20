@@ -6,4 +6,6 @@ export interface User {
   phone: string;
   status: string;
   roles: string[];
+  password: string;
+  profilPictureUrl: string;
 }
