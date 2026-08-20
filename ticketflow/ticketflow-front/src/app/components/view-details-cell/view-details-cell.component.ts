@@ -1,13 +1,8 @@
-import { Component, output } from '@angular/core';
+import {Component, inject, output} from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 import { User } from '@models/user';
-
-// Étend les paramètres standards fournis par AG Grid avec notre propre paramètre "onViewUser",
-// une fonction qui permet au composant de renvoyer l'utilisateur sélectionné à UsersComponent.
-type ViewDetailsCellParams = ICellRendererParams<User> & {
-  onViewUser: (user: User) => void;
-};
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-view-details-cell',
@@ -17,36 +12,21 @@ type ViewDetailsCellParams = ICellRendererParams<User> & {
 })
 export class ViewUserDetailsCellComponent implements ICellRendererAngularComp{
 
-// L'utilisateur de la ligne AG Grid sur laquelle se trouve le bouton "View".
-// Il est fourni par AG Grid via params.data.
-  user: User | undefined;
+  private router = inject(Router);
 
-// Fonction reçue de UsersComponent.
-// Elle permet au composant du bouton de renvoyer l'utilisateur à UsersComponent.
-// ? = propriété optionnelle. Signifie que cette fonction peut ne pas avoir été fournie.
-  onViewUser?: (user: User) => void;
+  selectedUser!: User;
 
-  agInit(params: ViewDetailsCellParams): void {
+  viewUser(): void {
+    console.log(this.selectedUser);
+    this.router.navigate(['/users', this.selectedUser.id]);
+  }
 
-    // AG Grid fournit les données de la ligne dans params.data.
-    // Il s'agit donc de l'utilisateur correspondant à cette ligne.
-    this.user = params.data;
-
-    // Récupère la fonction onViewUser fournie par UsersComponent.
-    this.onViewUser = params.onViewUser;
+  agInit(params: ICellRendererParams<User>): void {
+    this.selectedUser = params.data!;
   }
 
   refresh(params: ICellRendererParams<User>): boolean {
-    this.user = params.data;
+    this.selectedUser = params.data!;
     return true;
   }
-
-  // Lorsque l'utilisateur clique sur View, on transmet l'utilisateur
-  // de la ligne à la fonction fournie par UsersComponent.
-  viewUser(): void {
-    if (this.user) {
-      this.onViewUser?.(this.user);
-    }
-  }
-
 }

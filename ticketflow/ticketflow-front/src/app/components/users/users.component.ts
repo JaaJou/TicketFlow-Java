@@ -1,4 +1,4 @@
-import { Component, inject, signal, AfterViewInit } from '@angular/core';
+import {Component, inject, signal, AfterViewInit, OnInit} from '@angular/core';
 import { UserService } from '@services/user.service';
 import { User } from '@models/user';
 import { AgGridAngular } from 'ag-grid-angular';
@@ -12,18 +12,10 @@ import {ColDef, themeQuartz, SelectionChangedEvent, RowSelectionOptions, ICellRe
   templateUrl: './users.html',
   styleUrl: './users.css',
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit{
 
   private userService = inject(UserService);
   users = signal<User[]>([]);
-
-  selectedUser: User | null = null;
-
-  // Récupère l'utilisateur envoyé par ViewUserDetailsCellComponent
-  // et le stocke pour pouvoir l'afficher dans la modale.
-  viewUser(user: User): void {
-    this.selectedUser = user;
-  }
 
   colDefs: ColDef<User>[] = [
     {field: 'firstName', headerName: 'Prénom', sortable: true, filter: true},
@@ -31,15 +23,7 @@ export class UsersComponent {
     {field: 'email', headerName: 'Mail', sortable: true, filter: true},
     {
       headerName: 'Actions',
-
-      // Pour chaque ligne, AG Grid utilise ce composant pour afficher un bouton 'View' (voir le html).
-      cellRenderer: ViewUserDetailsCellComponent,
-
-      // On transmet au composant une fonction qui sera appelée lorsqu'un
-      // utilisateur sera sélectionné. Le "user" sera fourni par le renderer.
-      cellRendererParams: {
-        onViewUser: (user: User) => this.viewUser(user)
-      }
+      cellRenderer: ViewUserDetailsCellComponent
     }
   ]
 
@@ -59,13 +43,13 @@ export class UsersComponent {
 
   loadUsers() : void {
     this.userService.getUsers().subscribe({
-        next: usersFromService =>{
-          this.users.set(usersFromService)
-        },
-        error: error => {
-          console.error('Erreur api :', error);
-        }
-      });
+      next: usersFromService =>{
+        this.users.set(usersFromService)
+      },
+      error: error => {
+        console.error('Erreur api :', error);
+      }
+    });
   }
 
   emptyUsers(): void {
@@ -80,6 +64,17 @@ export class UsersComponent {
     modal?.addEventListener('hide.bs.modal', () => {
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur();
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    this.userService.getUsers().subscribe({
+      next: usersFromService =>{
+        this.users.set(usersFromService)
+      },
+      error: error => {
+        console.error('Erreur api :', error);
       }
     });
   }
