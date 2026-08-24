@@ -4,7 +4,7 @@ import com.jaajou.ticketflow.entity.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface IUserService {
     User createUser(String firstName, String lastName, String email, String password, String phone, String profilePictureUrl);
     User getUserById(Long id);
     List<User> getAllUsers();

@@ -24,3 +24,6 @@ spring:
     baseline-on-migrate: true
     schemas:
       - ticketflow
+jwt:
+  secret: "une-cle-secrete-tres-longue-et-aleatoire-pour-ticketflow"
+  expiration: 3600000

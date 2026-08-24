@@ -5,7 +5,7 @@ import com.jaajou.ticketflow.dto.request.UserUpdateRequest;
 import com.jaajou.ticketflow.dto.response.UserResponse;
 import com.jaajou.ticketflow.entity.User;
 import com.jaajou.ticketflow.mapper.UserMapper;
-import com.jaajou.ticketflow.service.UserService;
+import com.jaajou.ticketflow.service.IUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final IUserService userService;
     private final UserMapper userMapper;
 
     @GetMapping
