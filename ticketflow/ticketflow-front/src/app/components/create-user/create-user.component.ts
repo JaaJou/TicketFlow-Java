@@ -19,9 +19,6 @@ export class CreateUserComponent implements OnInit {
   private userService = inject(UserService);
   private fb = inject(FormBuilder);
 
-  statusOptions = Object.values(Status);
-  rolesOptions = Object.values(Role);
-
   userForm!: FormGroup;
 
   ngOnInit(): void {
