@@ -1,5 +1,5 @@
 package com.jaajou.ticketflow.dto.auth;
 
-public record LoginResponse(
+public record AuthResponse(
         String token
-) {}
+) { }
