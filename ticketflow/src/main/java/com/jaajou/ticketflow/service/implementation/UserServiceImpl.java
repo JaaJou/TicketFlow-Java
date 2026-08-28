@@ -8,7 +8,7 @@ import com.jaajou.ticketflow.repository.UserRepository;
 import com.jaajou.ticketflow.repository.RoleRepository;
 import com.jaajou.ticketflow.repository.UserRoleRepository;
 import com.jaajou.ticketflow.repository.UserStatusRepository;
-import com.jaajou.ticketflow.service.UserService;
+import com.jaajou.ticketflow.service.IUserService;
 import com.jaajou.ticketflow.exception.ResourceNotFoundException;
 import com.jaajou.ticketflow.exception.EmailAlreadyUsedException;
 
@@ -22,7 +22,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;

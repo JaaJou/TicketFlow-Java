@@ -1,0 +1,39 @@
+<div class="auth-container">
+  <h2>Connexion</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" />
+
+      @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+      <span class="error">
+          @if (loginForm.get('email')?.errors?.['required']) {
+            L'email est requis.
+          }
+          @if (loginForm.get('email')?.errors?.['email']) {
+            Format d'email invalide.
+          }
+        </span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="password">Mot de passe</label>
+      <input id="password" type="password" formControlName="password" />
+
+      @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+      <span class="error">Le mot de passe est requis.</span>
+      }
+    </div>
+
+    @if (errorMessage) {
+    <div class="error global-error">{{ errorMessage }}</div>
+    }
+
+    <button type="submit">Se connecter</button>
+  </form>
+
+  <p>Pas encore de compte ? <a routerLink="/register">S'inscrire</a></p>
+</div>
