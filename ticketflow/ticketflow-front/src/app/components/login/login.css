@@ -1,0 +1,87 @@
+.auth-container {
+  max-width: 400px;
+  margin: 4rem auto;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.auth-container h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+}
+
+.form-field label {
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333333;
+}
+
+.form-field input {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-field input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.error {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  color: #dc2626;
+}
+
+.global-error {
+  margin-bottom: 1rem;
+  padding: 0.6rem;
+  border-radius: 4px;
+  background-color: #fef2f2;
+  text-align: center;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #1d4ed8;
+}
+
+.auth-container p {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-container a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.auth-container a:hover {
+  text-decoration: underline;
+}

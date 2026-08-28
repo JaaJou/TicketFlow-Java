@@ -8,7 +8,7 @@ import com.jaajou.ticketflow.entity.User;
 import com.jaajou.ticketflow.exception.EmailAlreadyUsedException;
 import com.jaajou.ticketflow.exception.ResourceNotFoundException;
 import com.jaajou.ticketflow.mapper.UserMapper;
-import com.jaajou.ticketflow.service.UserService;
+import com.jaajou.ticketflow.service.IUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -37,7 +37,7 @@ class UserControllerTest {
     private ObjectMapper objectMapper;
 
     @MockitoBean
-    private UserService userService;
+    private IUserService userService;
 
     @MockitoBean
     private UserMapper userMapper;
