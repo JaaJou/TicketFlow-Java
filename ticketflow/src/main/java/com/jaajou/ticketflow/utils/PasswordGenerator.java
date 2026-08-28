@@ -7,7 +7,7 @@ public class PasswordGenerator {
     public static void main(String[] args) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        String password = "ticketflow_mdp";
+        String password = "admin";
         String hash = encoder.encode(password);
 
         System.out.println(hash);

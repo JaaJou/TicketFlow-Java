@@ -26,4 +26,4 @@ spring:
       - ticketflow
 jwt:
   secret: "une-cle-secrete-tres-longue-et-aleatoire-pour-ticketflow"
-  expiration: 3600000
+  expiration: 1800000
