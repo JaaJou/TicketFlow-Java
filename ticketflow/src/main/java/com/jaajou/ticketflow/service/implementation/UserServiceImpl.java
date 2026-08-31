@@ -38,7 +38,7 @@ public class UserServiceImpl implements IUserService {
             throw new EmailAlreadyUsedException(email);
         }
 
-        UserStatus activeStatus = userStatusRepository.findByName("ACTIVE")
+        UserStatus activeStatus = userStatusRepository.findByName("PENDING")
                 .orElseThrow(() -> new ResourceNotFoundException("UserStatus", "ACTIVE"));
 
         User user = new User();

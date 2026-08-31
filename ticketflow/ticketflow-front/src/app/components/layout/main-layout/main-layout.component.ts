@@ -16,4 +16,7 @@ export class MainLayoutComponent {
     this.authService.logout();
   }
 
+  DisplayAdminElement(): boolean {
+    return this.authService.hasRole("ROLE_ADMIN");
+  }
 }

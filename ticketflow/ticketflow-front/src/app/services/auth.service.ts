@@ -9,7 +9,9 @@ import {CreateUserRequest} from '@models/createUserRequest';
 
 interface IJwtPayload {
   sub: string;
+  roles: string[];
   exp: number;
+  iat: number;
 }
 
 /**
@@ -78,6 +80,22 @@ export class AuthService {
       this.logout();
       return false;
     }
+  }
+
+  getRoles(): string[] {
+    if(this.isAuthenticated())
+    {
+      const token = this.getToken();
+      const decoded = jwtDecode<IJwtPayload>(token!);
+      return decoded.roles;
+    }
+
+    return [];
+  }
+
+  hasRole(role: string): boolean {
+    const roles = this.getRoles();
+    return roles.includes(role);
   }
 
   private setToken(token: string): void {
