@@ -4,6 +4,8 @@ import { Observable, tap } from 'rxjs';
 import { AuthResponse } from '@models/auth/auth.response';
 import {jwtDecode} from 'jwt-decode';
 import {Router} from '@angular/router';
+import { User } from '@models/user';
+import {CreateUserRequest} from '@models/createUserRequest';
 
 interface IJwtPayload {
   sub: string;
@@ -18,6 +20,7 @@ interface IJwtPayload {
 export class AuthService {
 
   private readonly apiUrl: string = 'http://localhost:8080/api/auth';
+  private readonly apiUrlUser: string = 'http://localhost:8080/api/users';
   private readonly http = inject(HttpClient);
   private readonly tokenKey = 'auth_token';
 
@@ -27,8 +30,8 @@ export class AuthService {
    * Envoie les identifiants d'inscription au backend.
    * Ne stocke rien : l'utilisateur doit ensuite se connecter.
    */
-  register(email: string, password: string): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/register`, { email, password });
+  register(newUser: CreateUserRequest): Observable<User> {
+    return this.http.post<User>(`${this.apiUrlUser}`, newUser);
   }
 
   /**

@@ -44,8 +44,7 @@ public class UserController {
                 request.lastName(),
                 request.email(),
                 request.password(),
-                request.phone(),
-                request.profilePictureUrl()
+                request.phone()
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.toResponse(user));
     }

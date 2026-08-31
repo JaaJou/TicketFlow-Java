@@ -9,6 +9,5 @@ public record UserCreateRequest(
         @NotBlank(message = "Le nom est obligatoire") String lastName,
         @Email(message = "Email invalide") @NotBlank String email,
         @Size(min = 8, message = "Le mot de passe doit faire au moins 8 caractères") String password,
-        String phone,
-        String profilePictureUrl
+        String phone
 ) {}

@@ -33,7 +33,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional
-    public User createUser(String firstName, String lastName, String email, String password, String phone, String profilePictureUrl) {
+    public User createUser(String firstName, String lastName, String email, String password, String phone) {
         if (userRepository.findByEmail(email).isPresent()) {
             throw new EmailAlreadyUsedException(email);
         }
@@ -47,7 +47,7 @@ public class UserServiceImpl implements IUserService {
         user.setEmail(email);
         user.setPasswordHash(passwordEncoder.encode(password));
         user.setPhone(phone);
-        user.setProfilePictureUrl(profilePictureUrl);
+        user.setProfilePictureUrl("");
         user.setStatus(activeStatus);
         user.setEmailVerified(false);
         user.setCreatedAt(LocalDateTime.now());
