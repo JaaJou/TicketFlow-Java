@@ -1,7 +1,29 @@
 <div class="auth-container">
-  <h2>Inscription</h2>
+  <h2>Sign Up</h2>
 
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-field">
+      <label for="firstName">First name</label>
+      <input id="firstName" type="text" formControlName="firstName" />
+
+      @if (registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched) {
+        <span class="error">
+          First name is mandatory.
+        </span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="lastName">Last name</label>
+      <input id="lastName" type="text" formControlName="lastName" />
+
+      @if (registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched) {
+      <span class="error">
+          Last name is mandatory.
+        </span>
+      }
+    </div>
 
     <div class="form-field">
       <label for="email">Email</label>
@@ -10,27 +32,60 @@
       @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
       <span class="error">
           @if (registerForm.get('email')?.errors?.['required']) {
-            L'email est requis.
+            Email is mandatory.
           }
           @if (registerForm.get('email')?.errors?.['email']) {
-            Format d'email invalide.
+            Email format incorrect.
           }
         </span>
       }
     </div>
 
     <div class="form-field">
-      <label for="password">Mot de passe</label>
+      <label for="password">Password</label>
       <input id="password" type="password" formControlName="password" />
 
       @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
       <span class="error">
           @if (registerForm.get('password')?.errors?.['required']) {
-            Le mot de passe est requis.
+            Password is mandatory.
           }
           @if (registerForm.get('password')?.errors?.['minlength']) {
-            8 caractères minimum.
+            8 characters minimum.
           }
+        </span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="confirmPassword">Confirm password</label>
+      <input id="confirmPassword" type="password" formControlName="confirmPassword" />
+
+      @if (registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) {
+      <span class="error">
+          @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+            Password confirmation is mandatory.
+          }
+          @if (registerForm.get('confirmPassword')?.errors?.['minlength']) {
+            8 characters minimum.
+          }
+        </span>
+      }
+
+      @if( registerForm.get('confirmPassword')?.touched && registerForm.errors?.['passwordMismatch']) {
+      <span class="error">
+        Password confirmation do not match password.
+      </span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="phone">Phone number</label>
+      <input id="phone" type="text" formControlName="phone"/>
+
+      @if (registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched) {
+      <span class="error">
+          Phone number is mandatory.
         </span>
       }
     </div>
@@ -39,6 +94,8 @@
     <div class="error global-error">{{ errorMessage }}</div>
     }
 
-    <button type="submit">S'inscrire</button>
+    <button type="submit">Create account</button>
   </form>
+
+  <p>Already have an account ? <a routerLink="/login">Log in</a></p>
 </div>
