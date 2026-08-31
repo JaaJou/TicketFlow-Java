@@ -80,7 +80,7 @@ class UserServiceImplTest {
         when(roleRepository.findByName("USER")).thenReturn(Optional.of(userRole));
 
         // when
-        User result = userService.createUser("Jean", "Dupont", "jean@test.com", "password123", "0671151769", "jaajou.png");
+        User result = userService.createUser("Jean", "Dupont", "jean@test.com", "password123", "0671151769");
 
         // then
         assertThat(result.getId()).isEqualTo(42L);
@@ -102,7 +102,7 @@ class UserServiceImplTest {
 
         // when / then
         assertThatThrownBy(() ->
-                userService.createUser("Jean", "Dupont", "jean@test.com", "password123","0671151769", "jaajou.png")
+                userService.createUser("Jean", "Dupont", "jean@test.com", "password123","0671151769")
         )
                 .isInstanceOf(EmailAlreadyUsedException.class)
                 .hasMessageContaining("jean@test.com");
@@ -120,7 +120,7 @@ class UserServiceImplTest {
 
         // when / then
         assertThatThrownBy(() ->
-                userService.createUser("Jean", "Dupont", "jean@test.com", "password123", "0671151769", "jaajou.png")
+                userService.createUser("Jean", "Dupont", "jean@test.com", "password123", "0671151769")
         )
                 .isInstanceOf(ResourceNotFoundException.class);
 

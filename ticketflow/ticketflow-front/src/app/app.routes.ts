@@ -9,6 +9,7 @@ import {RegisterComponent} from '@components/register/register.component';
 import {AuthLayoutComponent} from '@components/layout/auth-layout/auth-layout.component';
 import {MainLayoutComponent} from '@components/layout/main-layout/main-layout.component';
 import {HomeRedirectGuard} from '@guards/home.guard';
+import {adminGuard} from '@guards/role.guard';
 
 export const routes: Routes = [
   // Route racine
@@ -35,9 +36,9 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: 'home', component: HomeComponent },
-      { path: 'users', component: UsersComponent },
-      { path: 'users/new', component: CreateUserComponent },
-      { path: 'users/:id', component: UserDetailsComponent }
+      { path: 'users', component: UsersComponent, canActivate: [adminGuard] },
+      { path: 'users/new', component: CreateUserComponent, canActivate: [adminGuard] },
+      { path: 'users/:id', component: UserDetailsComponent, canActivate: [adminGuard] }
     ]
   },
 

@@ -1,5 +1,5 @@
 <div class="auth-container">
-  <h2>Connexion</h2>
+  <h2>Loging In</h2>
 
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
@@ -20,7 +20,7 @@
     </div>
 
     <div class="form-field">
-      <label for="password">Mot de passe</label>
+      <label for="password">Password</label>
       <input id="password" type="password" formControlName="password" />
 
       @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
@@ -32,8 +32,8 @@
     <div class="error global-error">{{ errorMessage }}</div>
     }
 
-    <button type="submit">Se connecter</button>
+    <button type="submit">Log In</button>
   </form>
 
-  <p>Pas encore de compte ? <a routerLink="/register">S'inscrire</a></p>
+  <p>No user account yet ? <a routerLink="/register">Sign in</a></p>
 </div>

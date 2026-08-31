@@ -49,7 +49,7 @@ class UserControllerTest {
 
         // given
         UserCreateRequest request = new UserCreateRequest(
-                "Jean", "Dupont", "jean.test1@test.com", "password123", "0671151769", "jaajou.png"
+                "Jean", "Dupont", "jean.test1@test.com", "password123", "0671151769"
         );
         User createdUser = new User();
         createdUser.setId(1L);
@@ -58,7 +58,7 @@ class UserControllerTest {
                 1L, "Jean", "Dupont", "jean.test1@test.com", "0671151769","ACTIVE", List.of("USER")
         );
 
-        when(userService.createUser("Jean", "Dupont", "jean.test1@test.com", "password123", "0671151769", "jaajou.png"))
+        when(userService.createUser("Jean", "Dupont", "jean.test1@test.com", "password123", "0671151769"))
                 .thenReturn(createdUser);
         when(userMapper.toResponse(createdUser)).thenReturn(response);
 
@@ -72,14 +72,14 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.email").value("jean.test1@test.com"))
                 .andExpect(jsonPath("$.roles[0]").value("USER"));
 
-        verify(userService).createUser("Jean", "Dupont", "jean.test1@test.com", "password123", "0671151769", "jaajou.png");
+        verify(userService).createUser("Jean", "Dupont", "jean.test1@test.com", "password123", "0671151769");
     }
 
     @Test
     void create_shouldReturn400_whenEmailIsInvalid() throws Exception {
         // given — email invalide, déclenche @Valid avant même d'appeler le service
         UserCreateRequest request = new UserCreateRequest(
-                "Jean", "Dupont", "pas-un-email", "password123", "0671151769", "jaajou.png"
+                "Jean", "Dupont", "pas-un-email", "password123", "0671151769"
         );
 
         // when / then
@@ -95,9 +95,9 @@ class UserControllerTest {
     void create_shouldReturn409_whenEmailAlreadyUsed() throws Exception {
         // given
         UserCreateRequest request = new UserCreateRequest(
-                "Jean", "Dupont", "jean@test.com", "password123", "0671151769", "jaajou.png"
+                "Jean", "Dupont", "jean@test.com", "password123", "0671151769"
         );
-        when(userService.createUser(anyString(), anyString(), anyString(), anyString(), anyString(), anyString()))
+        when(userService.createUser(anyString(), anyString(), anyString(), anyString(), anyString()))
                 .thenThrow(new EmailAlreadyUsedException("jean@test.com"));
 
         // when / then

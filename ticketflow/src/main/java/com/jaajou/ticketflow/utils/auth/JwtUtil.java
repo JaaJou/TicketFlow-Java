@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.Date;
 
 @Component
@@ -44,9 +45,10 @@ public class JwtUtil {
      *  .compact() :
      *          Assemble les trois parties (header, payload, signature) en une seule chaîne de caractères finale
      */
-    public String generateToken(String email) {
+    public String generateToken(String email, Collection<String> roles) {
         return Jwts.builder()
                 .subject(email)
+                .claim("roles", roles)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expirationMs))
                 .signWith(getSigningKey())
